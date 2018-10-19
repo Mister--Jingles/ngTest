@@ -88,5 +88,13 @@ describe(`${EmittersComponent.name} | Component with emitters:`, () => {
 
       verify(serviceMock.callDoSmthInteresting()).once();
     });
+
+    it('should call callDoSmthInteresting twice', () => {
+      fakeEmitter1$.next();
+      fakeEmitter2$.next();
+      fakeEmitter2$.next();
+
+      verify(serviceMock.callDoSmthInteresting()).twice();
+    });
   });
 });
