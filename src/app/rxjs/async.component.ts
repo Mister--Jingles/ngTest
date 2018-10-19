@@ -1,14 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AsyncService} from '../services/async.service';
+import {AsyncService} from './async.service';
 import {DependentService} from '../services/dependent.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-async-service-component',
+  selector: 'app-async-component',
   template: ''
 })
-export class AsyncServiceComponent implements OnDestroy {
+export class AsyncComponent implements OnDestroy {
   private destroy$ = new Subject();
 
   constructor(private asyncService: AsyncService,
@@ -29,7 +29,5 @@ export class AsyncServiceComponent implements OnDestroy {
     this.asyncService.debounce$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.service.callDoSmthInteresting());
-
-    this.asyncService.emitValue();
   }
 }

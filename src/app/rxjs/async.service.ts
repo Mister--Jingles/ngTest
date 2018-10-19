@@ -1,15 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, Subject, timer} from 'rxjs';
+import {BehaviorSubject, Observable, timer} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 
 @Injectable()
 export class AsyncService {
   static TIME = 250;
-  private subject = new Subject<void>();
-
-  emitValue() {
-    this.subject.next();
-  }
+  private subject = new BehaviorSubject(null);
 
   timer$(): Observable<number> {
     return timer(AsyncService.TIME);
