@@ -11,6 +11,7 @@ import {PlainService} from './services/plain.service';
 import {DependentService} from './services/dependent.service';
 import {AsyncService} from './rxjs/async.service';
 import {EmittersService} from './rxjs/emitters.service';
+import {LocalStorageService} from './services/localStorage.service';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {EmittersService} from './rxjs/emitters.service';
     PlainService,
     DependentService,
     AsyncService,
-    EmittersService
+    EmittersService,
+    LocalStorageService
   ],
   declarations: [
     AppComponent,
