@@ -2,7 +2,7 @@ import {DumbComponent} from './dumb.component';
 import {Component, ViewChild} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-fdescribe(`${DumbComponent} | Test @Input and @Output:`, () => {
+describe(`${DumbComponent.name} | Test @Input and @Output:`, () => {
   // region TestSetup
   const DEFAULT_NAME = 'name';
 

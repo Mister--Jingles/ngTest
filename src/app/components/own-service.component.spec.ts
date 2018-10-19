@@ -1,29 +1,32 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {SmartComponent} from './smart.coponent';
 import {DependentService} from '../services/dependent.service';
 import {instance, mock, verify} from 'ts-mockito';
+import {OwnServiceComponent} from './own-service.component';
 
-describe(`${SmartComponent.name} | Test smart component with OnPush chd strategy:`, () => {
+describe(`${OwnServiceComponent.name} | Component with own providers:`, () => {
   // region TestSetup
-  let fixture: ComponentFixture<SmartComponent>;
+  let fixture: ComponentFixture<OwnServiceComponent>;
   let serviceMock: DependentService;
-  let component: SmartComponent;
+  let component: OwnServiceComponent;
 
   beforeEach(() => {
     serviceMock = mock<DependentService>(DependentService);
 
     fixture = TestBed
       .configureTestingModule({
-        declarations: [SmartComponent],
-        providers: [
-          {provide: DependentService, useValue: instance(serviceMock)}
-        ]
+        declarations: [OwnServiceComponent]
       })
-      .overrideTemplate(SmartComponent, '')
-      .createComponent(SmartComponent);
+      .overrideComponent(OwnServiceComponent, {
+        set: {
+          template: '',
+          providers: [
+            {provide: DependentService, useValue: instance(serviceMock)}
+          ]
+        }
+      })
+      .createComponent(OwnServiceComponent);
 
     component = fixture.componentInstance;
-    spyOn(component['changeDetectorRef'], 'markForCheck');
 
     fixture.detectChanges();
   });
@@ -35,9 +38,5 @@ describe(`${SmartComponent.name} | Test smart component with OnPush chd strategy
 
   it('should call service callDoSmthInteresting method', () => {
     verify(serviceMock.callDoSmthInteresting()).once();
-  });
-
-  it('should mark component for check', () => {
-    expect(component['changeDetectorRef'].markForCheck).toHaveBeenCalled();
   });
 });
